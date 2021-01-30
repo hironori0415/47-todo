@@ -1,11 +1,32 @@
 //入力して保存するjs
 
-import React from 'react'
+import React, { useState } from 'react'
 
-const From = () => {
+
+const From = ({ todos, setTodos }) => {
+    const [value, setvalue] = useState('')
+    const handleSubmit = e => {
+        e.preventDefault()
+        setTodos([
+            ...todos,
+            {
+                content: value
+            }
+        ])
+        // 演習2 回答
+        setvalue('')
+        // console.log('value: ', value)
+    }
     return (
-        <form>
-            <input type='text' />
+        <form onSubmit={handleSubmit}>
+            <input
+                // 演習2　回答
+                value={value}
+                type='text'
+                onChange={e => {
+                    setvalue(e.target.value)
+                }}
+            />
         </form>
     )
 }
